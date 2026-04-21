@@ -9,8 +9,8 @@
 
 ## Sprint 2 (Core Features)
 - [x] Improve input validation (handle bad inputs)
-- [x ] Add error handling for missing stock data
-- [x ] Clean up output formatting
+- [x] Add error handling for missing stock data
+- [x] Clean up output formatting
 - [x] Add support for multiple stocks
 - [x] Commit and push changes regularly
 
