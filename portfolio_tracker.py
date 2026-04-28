@@ -6,8 +6,13 @@ import yfinance as yf
 print("\n=== Stock Portfolio Tracker ===")
 
 ticker = input("Enter stock ticker: ").upper()
-shares = float(input("Enter number of shares: "))
-buy_price = float(input("Enter purchase price: "))
+try:
+    shares = float(input("Enter number of shares: "))
+    buy_price = float(input("Enter purchase price: "))
+except ValueError:
+    print("Invalid input. Please enter numbers only.")
+    exit()
+    
 
 # Warning for 0 shares
 if shares == 0:
