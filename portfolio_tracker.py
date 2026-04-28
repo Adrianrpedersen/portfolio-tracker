@@ -44,3 +44,6 @@ else:
     print(f"Total Value: ${total_value}")
     print(f"Profit/Loss: ${profit_loss}")
     print(f"Percent Change: {percent_change}%")
+
+    with open("portfolio.csv", "a") as file:
+        file.write(f"{ticker},{shares},{buy_price},{current_price},{total_value},{profit_loss},{percent_change}\n")
