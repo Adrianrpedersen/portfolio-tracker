@@ -1,54 +1,65 @@
-# Smart Portfolio Tracker
-# Adrian Pedersen
-
 import yfinance as yf
 
-print("\n=== Stock Portfolio Tracker ===")
+portfolio = []
 
-ticker = input("Enter stock ticker: ").upper()
-try:
+print("=== Stock Portfolio Tracker ===")
+
+while True:
+    ticker = input("\nEnter stock ticker or type DONE to finish: ").upper()
+
+    if ticker == "DONE":
+        break
+
     shares = float(input("Enter number of shares: "))
     buy_price = float(input("Enter purchase price: "))
-except ValueError:
-    print("Invalid input. Please enter numbers only.")
-    exit()
-    
 
-# Warning for 0 shares
-if shares == 0:
-    print("Warning: You entered 0 shares.")
+    stock = yf.Ticker(ticker)
+    info = stock.info
+    current_price = info.get("currentPrice")
 
-# Get stock data
-stock_data = yf.Ticker(ticker)
-info = stock_data.info
+    if current_price is None:
+        print(f"Could not find current price for {ticker}. Try another ticker.")
+        continue
 
-current_price = info.get("currentPrice")
+    total_cost = shares * buy_price
+    current_value = shares * current_price
+    profit_loss = current_value - total_cost
+    percent_change = (profit_loss / total_cost) * 100 if total_cost != 0 else 0
 
-# Handle missing price
-if current_price is None:
-    print(f"Could not retrieve stock price for {ticker}")
-else:
-    # Calculations
-    total_value = current_price * shares
-    profit_loss = (current_price - buy_price) * shares
-    percent_change = ((current_price - buy_price) / buy_price) * 100 if buy_price != 0 else 0
+    portfolio.append({
+        "ticker": ticker,
+        "shares": shares,
+        "buy_price": buy_price,
+        "current_price": current_price,
+        "total_cost": total_cost,
+        "current_value": current_value,
+        "profit_loss": profit_loss,
+        "percent_change": percent_change
+    })
 
-    # Round values
-    current_price = round(current_price, 2)
-    total_value = round(total_value, 2)
-    profit_loss = round(profit_loss, 2)
-    percent_change = round(percent_change, 2)
+print("\n=== Portfolio Summary ===")
 
-    # Output
-    print("\n" + "-" * 30)
-    print("--- Portfolio Summary ---")
-    print(f"Ticker: {ticker}")
-    print(f"Shares: {shares}")
-    print(f"Buy Price: ${buy_price:.2f}")
-    print(f"Current Price: ${current_price}")
-    print(f"Total Value: ${total_value}")
-    print(f"Profit/Loss: ${profit_loss}")
-    print(f"Percent Change: {percent_change}%")
+portfolio_total_cost = 0
+portfolio_current_value = 0
+portfolio_profit_loss = 0
 
-    with open("portfolio.csv", "a") as file:
-        file.write(f"{ticker},{shares},{buy_price},{current_price},{total_value},{profit_loss},{percent_change}\n")
+for stock in portfolio:
+    print("\n------------------------")
+    print(f"Ticker: {stock['ticker']}")
+    print(f"Shares: {stock['shares']}")
+    print(f"Buy Price: ${stock['buy_price']:.2f}")
+    print(f"Current Price: ${stock['current_price']:.2f}")
+    print(f"Total Cost: ${stock['total_cost']:.2f}")
+    print(f"Current Value: ${stock['current_value']:.2f}")
+    print(f"Profit/Loss: ${stock['profit_loss']:.2f}")
+    print(f"Percent Change: {stock['percent_change']:.2f}%")
+
+    portfolio_total_cost += stock["total_cost"]
+    portfolio_current_value += stock["current_value"]
+    portfolio_profit_loss += stock["profit_loss"]
+
+print("\n=== Total Portfolio Results ===")
+print(f"Total Cost: ${portfolio_total_cost:.2f}")
+print(f"Total Current Value: ${portfolio_current_value:.2f}")
+print(f"Total Profit/Loss: ${portfolio_profit_loss:.2f}")
+
