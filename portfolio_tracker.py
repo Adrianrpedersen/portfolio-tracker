@@ -63,3 +63,9 @@ print(f"Total Cost: ${portfolio_total_cost:.2f}")
 print(f"Total Current Value: ${portfolio_current_value:.2f}")
 print(f"Total Profit/Loss: ${portfolio_profit_loss:.2f}")
 
+import json
+
+with open("portfolio.json", "w") as f:
+    json.dump(portfolio, f, indent=4)
+
+print("\nPortfolio saved to portfolio.json")
