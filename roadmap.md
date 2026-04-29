@@ -19,5 +19,5 @@
 - [x] Save portfolio data
 - [x] Improve user experience (messages, formatting)
 - [ ] Add comments and documentation
-- [ ] Support multiple stocks portfolio
+- [x] Support multiple stocks portfolio
 
