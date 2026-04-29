@@ -18,6 +18,6 @@
 - [x] Store data in CSV file
 - [x] Save portfolio data
 - [x] Improve user experience (messages, formatting)
-- [ ] Add comments and documentation
+- [x] Add comments and documentation
 - [x] Support multiple stocks portfolio
 
