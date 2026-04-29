@@ -1,0 +1,32 @@
+[
+    {
+        "ticker": "AAPL",
+        "shares": 100.0,
+        "buy_price": 150.0,
+        "current_price": 270.5,
+        "total_cost": 15000.0,
+        "current_value": 27050.0,
+        "profit_loss": 12050.0,
+        "percent_change": 80.33333333333333
+    },
+    {
+        "ticker": "COLD",
+        "shares": 100.0,
+        "buy_price": 10.0,
+        "current_price": 12.245,
+        "total_cost": 1000.0,
+        "current_value": 1224.5,
+        "profit_loss": 224.5,
+        "percent_change": 22.45
+    },
+    {
+        "ticker": "MSFT",
+        "shares": 5.0,
+        "buy_price": 300.0,
+        "current_price": 424.08,
+        "total_cost": 1500.0,
+        "current_value": 2120.4,
+        "profit_loss": 620.4000000000001,
+        "percent_change": 41.36000000000001
+    }
+]
